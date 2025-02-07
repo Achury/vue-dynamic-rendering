@@ -29,21 +29,16 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue';
-import ComponentA from './ComponentA.vue';
-import ComponentB from './ComponentB.vue';
-import ComponentC from './ComponentC.vue';
+<script setup lang="ts">
+import { computed } from 'vue';
+import { useDynamicStore } from '../stores/dynamicStore';
 
-const components = {
-  ComponentA,
-  ComponentB,
-  ComponentC,
-};
+const dynamicStore = useDynamicStore();
+const selectedComponent = computed(() => dynamicStore.getSelectedComponent);
 
-const selectedComponent = ref(null);
-
-function setComponent(componentName) {
-  selectedComponent.value = components[componentName];
+function setComponent(
+  componentName: 'ComponentA' | 'ComponentB' | 'ComponentC'
+) {
+  dynamicStore.setComponent(componentName);
 }
 </script>
