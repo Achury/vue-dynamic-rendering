@@ -24,17 +24,56 @@
       </button>
     </div>
     <div class="mt-8 w-full max-w-2xl px-4">
-      <component :is="selectedComponent" />
+      <component :is="selectedComponentInstance" :posts="currentPosts" />
     </div>
+
+    <!-- Loading State -->
+    <div v-if="loading" class="text-gray-400">Loading...</div>
+
+    <!-- Error State -->
+    <div v-if="error" class="text-red-500">{{ error }}</div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import { useDynamicStore } from '../stores/dynamicStore';
+import { useDataStore } from '../stores/dataStore';
+import { storeToRefs } from 'pinia';
+import { computed, onMounted } from 'vue';
+import ComponentA from './ComponentA.vue';
+import ComponentB from './ComponentB.vue';
+import ComponentC from './ComponentC.vue';
 
 const dynamicStore = useDynamicStore();
-const selectedComponent = computed(() => dynamicStore.getSelectedComponent);
+const dataStore = useDataStore();
+const { selectedComponent } = storeToRefs(dynamicStore);
+const { loading, error, splitData } = storeToRefs(dataStore);
+
+// Fetch data when the component is mounted
+onMounted(() => {
+  dataStore.fetchData();
+});
+
+const components = {
+  ComponentA,
+  ComponentB,
+  ComponentC,
+};
+
+// Get the current posts based on the selected component
+const currentPosts = computed(() => {
+  if (selectedComponent.value) {
+    return splitData.value[selectedComponent.value];
+  }
+  return [];
+});
+// Get the selected component
+const selectedComponentInstance = computed(() => {
+  if (selectedComponent.value) {
+    return components[selectedComponent.value];
+  }
+  return null;
+});
 
 function setComponent(
   componentName: 'ComponentA' | 'ComponentB' | 'ComponentC'
