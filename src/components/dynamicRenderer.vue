@@ -31,7 +31,15 @@
     <div v-if="loading" class="text-gray-400">Loading...</div>
 
     <!-- Error State -->
-    <div v-if="error" class="text-red-500">{{ error }}</div>
+    <div v-if="error" class="mt-8 text-red-500">
+      <p class="mb-4">Error: {{ error }}</p>
+      <button
+        @click="retryFetch"
+        class="px-6 py-3 border border-red-500 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-colors"
+      >
+        Retry
+      </button>
+    </div>
   </div>
 </template>
 
@@ -39,26 +47,28 @@
 import { useDynamicStore } from '../stores/dynamicStore';
 import { useDataStore } from '../stores/dataStore';
 import { storeToRefs } from 'pinia';
-import { computed, onMounted } from 'vue';
-import ComponentA from './ComponentA.vue';
-import ComponentB from './ComponentB.vue';
-import ComponentC from './ComponentC.vue';
+import { computed, onMounted, defineAsyncComponent } from 'vue';
 
 const dynamicStore = useDynamicStore();
 const dataStore = useDataStore();
 const { selectedComponent } = storeToRefs(dynamicStore);
 const { loading, error, splitData } = storeToRefs(dataStore);
 
-// Fetch data when the component is mounted
-onMounted(() => {
-  dataStore.fetchData();
-});
+// Lazy load components
+const ComponentA = defineAsyncComponent(() => import('./ComponentA.vue'));
+const ComponentB = defineAsyncComponent(() => import('./ComponentB.vue'));
+const ComponentC = defineAsyncComponent(() => import('./ComponentC.vue'));
 
 const components = {
   ComponentA,
   ComponentB,
   ComponentC,
 };
+
+// Fetch data when the component is mounted
+onMounted(() => {
+  dataStore.fetchData();
+});
 
 // Get the current posts based on the selected component
 const currentPosts = computed(() => {
@@ -67,6 +77,7 @@ const currentPosts = computed(() => {
   }
   return [];
 });
+
 // Get the selected component
 const selectedComponentInstance = computed(() => {
   if (selectedComponent.value) {
@@ -79,5 +90,9 @@ function setComponent(
   componentName: 'ComponentA' | 'ComponentB' | 'ComponentC'
 ) {
   dynamicStore.setComponent(componentName);
+}
+
+function retryFetch() {
+  dataStore.fetchData();
 }
 </script>
