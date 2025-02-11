@@ -55,9 +55,9 @@ const { selectedComponent } = storeToRefs(dynamicStore);
 const { loading, error, splitData } = storeToRefs(dataStore);
 
 // Lazy load components
-const ComponentA = defineAsyncComponent(() => import('./ComponentA.vue'));
-const ComponentB = defineAsyncComponent(() => import('./ComponentB.vue'));
-const ComponentC = defineAsyncComponent(() => import('./ComponentC.vue'));
+const ComponentA = defineAsyncComponent(() => import('./componentA.vue'));
+const ComponentB = defineAsyncComponent(() => import('./componentB.vue'));
+const ComponentC = defineAsyncComponent(() => import('./componentC.vue'));
 
 const components = {
   ComponentA,

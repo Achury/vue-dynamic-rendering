@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
+    "build": "node build.js",
     "preview": "vite preview",
     "test": "vitest",
-    "test:e2e": "cypress open"
+    "test:e2e": "cypress open",
+    "serve": "node server.js"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.4",
@@ -27,6 +28,7 @@
     "@vue/tsconfig": "^0.7.0",
     "cypress": "^14.0.2",
     "happy-dom": "^17.0.0",
+    "ts-node": "^10.9.2",
     "typescript": "~5.7.2",
     "vite": "^6.1.0",
     "vitest": "^3.0.5",

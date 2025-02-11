@@ -1,9 +1,6 @@
 import { defineStore } from 'pinia';
-import { markRaw } from 'vue';
+import { markRaw, defineAsyncComponent } from 'vue';
 import type { ComponentMap } from '../types/components';
-import ComponentA from '../components/ComponentA.vue';
-import ComponentB from '../components/ComponentB.vue';
-import ComponentC from '../components/ComponentC.vue';
 
 // Define the type for the component names
 type ComponentName = 'ComponentA' | 'ComponentB' | 'ComponentC';
@@ -25,13 +22,19 @@ export const useDynamicStore = defineStore('dynamic', {
         let component;
         switch (componentName) {
           case 'ComponentA':
-            component = markRaw(ComponentA); // Optimize re-renders
+            component = markRaw(
+              defineAsyncComponent(() => import('../components/componentA.vue'))
+            ); // Dynamically import
             break;
           case 'ComponentB':
-            component = markRaw(ComponentB);
+            component = markRaw(
+              defineAsyncComponent(() => import('../components/componentB.vue'))
+            );
             break;
           case 'ComponentC':
-            component = markRaw(ComponentC);
+            component = markRaw(
+              defineAsyncComponent(() => import('../components/componentC.vue'))
+            );
             break;
           default:
             throw new Error(`Unknown component: ${componentName}`);

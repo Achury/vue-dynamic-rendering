@@ -2,7 +2,7 @@ import { mount, flushPromises } from '@vue/test-utils';
 import { setActivePinia, createPinia } from 'pinia';
 import { useDynamicStore } from '../../src/stores/dynamicStore';
 import { useDataStore } from '../../src/stores/dataStore';
-import DynamicRenderer from '../../src/components/DynamicRenderer.vue';
+import DynamicRenderer from '../../src/components/dynamicRenderer.vue';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 
 describe('DynamicRenderer', () => {
