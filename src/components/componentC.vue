@@ -10,8 +10,22 @@
   </div>
 </template>
 
-<script setup lang="ts">
-defineProps<{
-  posts: any[];
-}>();
+<script lang="ts">
+import { defineComponent } from 'vue';
+import type { PropType } from 'vue'; // Use type-only import for PropType
+
+interface Post {
+  id: number;
+  title: string;
+  body: string;
+}
+
+export default defineComponent({
+  props: {
+    posts: {
+      type: Array as PropType<Post[]>,
+      required: true,
+    },
+  },
+});
 </script>
