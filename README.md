@@ -18,20 +18,33 @@ This project is a Vue.js application with Server-Side Rendering (SSR) enabled. I
     git clone https://github.com/Achury/vue-dynamic-rendering.git
    ```
 2. Install dependencies:
-   npm install
+
+```bash
+  npm install
+```
 
 ## Build and Run
 
 1. Build the project
-   npm run build
+
+```bash
+  npm run build
+```
+
 2. Start the server
-   npm run serve
+
+```bash
+  npm run serve
+```
+
 3. Access the application
    Open your browser and navigate to http://localhost:3000.
 
 ## Project Structure
 
-    project/
+```bash
+
+   project/
 
 ├── dist/ # Build output (client and server bundles)
 │ ├── client/ # Client-side bundle
@@ -63,19 +76,32 @@ This project is a Vue.js application with Server-Side Rendering (SSR) enabled. I
 ├── package.json # Project dependencies and scripts
 └── README.md # Project documentation
 
+```
+
 ## Testing
 
 The project uses Vitest for unit testing. To run the unit tests:
 
     1. Run all unit tests:
-        npm run test
+
+```bash
+       npm run test
+```
+
     2. Run tests in watch mode (useful during development):
-        npm run test -- --watch
+
+```bash
+       npm run test -- --watch
+```
 
 The project uses Cypress for end-to-end testing. To run the E2E tests:
 
     1. Open the Cypress test runner:
-        npm run test:e2e
+
+```bash
+       npm run test:e2e
+```
+
     2. Select the test file you want to run from the Cypress interface.
 
 ## Troubleshooting
