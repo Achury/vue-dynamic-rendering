@@ -58,13 +58,13 @@ This project is a Vue.js application with Server-Side Rendering (SSR) enabled. I
 │ ├── stores/ # Pinia stores
 │ │ ├── dynamicStore.ts
 │ │ └── dataStore.ts
-| |── types/ #TS custom types
-| | |── components.ts
-| |── test/ # Unit testing Vitest
-| | |── components/ #components tests
-| | | |── dynamicRenderer.test.ts
-| | |── stores/ #Stores tests
-| | | |── dataStores.test.ts
+│ │── types/ #TS custom types
+│ │ │── components.ts
+│ │── test/ # Unit testing Vitest
+│ │ │── components/ #components tests
+│ │ │ │── dynamicRenderer.test.ts
+│ │ │── stores/ #Stores tests
+│ │ │ │── dataStores.test.ts
 │ ├── App.vue # Main Vue component
 │ ├── main.ts # Client entry point
 │ └── entryServer.js # Server entry point
@@ -85,13 +85,13 @@ The project uses Vitest for unit testing. To run the unit tests:
     1. Run all unit tests:
 
 ```bash
-       npm run test
+  npm run test
 ```
 
     2. Run tests in watch mode (useful during development):
 
 ```bash
-       npm run test -- --watch
+  npm run test -- --watch
 ```
 
 The project uses Cypress for end-to-end testing. To run the E2E tests:
@@ -99,7 +99,7 @@ The project uses Cypress for end-to-end testing. To run the E2E tests:
     1. Open the Cypress test runner:
 
 ```bash
-       npm run test:e2e
+  npm run test:e2e
 ```
 
     2. Select the test file you want to run from the Cypress interface.
