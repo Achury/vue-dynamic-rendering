@@ -1,7 +1,7 @@
 import type { DefineComponent } from 'vue';
 
 // Define a type for the component map
-interface Post {
+export interface Post {
   id: number;
   title: string;
   body: string;

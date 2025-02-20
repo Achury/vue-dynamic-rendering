@@ -13,12 +13,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import type { PropType } from 'vue'; // Use type-only import for PropType
-
-interface Post {
-  id: number;
-  title: string;
-  body: string;
-}
+import type { Post } from '../types/components';
 
 export default defineComponent({
   props: {

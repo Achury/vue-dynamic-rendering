@@ -47,23 +47,12 @@
 import { useDynamicStore } from '../stores/dynamicStore';
 import { useDataStore } from '../stores/dataStore';
 import { storeToRefs } from 'pinia';
-import { computed, onMounted, defineAsyncComponent } from 'vue';
+import { computed, onMounted } from 'vue';
 
 const dynamicStore = useDynamicStore();
 const dataStore = useDataStore();
 const { selectedComponent } = storeToRefs(dynamicStore);
 const { loading, error, splitData } = storeToRefs(dataStore);
-
-// Lazy load components
-const ComponentA = defineAsyncComponent(() => import('./componentA.vue'));
-const ComponentB = defineAsyncComponent(() => import('./componentB.vue'));
-const ComponentC = defineAsyncComponent(() => import('./componentC.vue'));
-
-const components = {
-  ComponentA,
-  ComponentB,
-  ComponentC,
-};
 
 // Fetch data when the component is mounted
 onMounted(() => {
@@ -81,7 +70,7 @@ const currentPosts = computed(() => {
 // Get the selected component
 const selectedComponentInstance = computed(() => {
   if (selectedComponent.value) {
-    return components[selectedComponent.value];
+    return dynamicStore.getSelectedComponent;
   }
   return null;
 });
